@@ -22,8 +22,8 @@ for(let i=0; i<4; i++)
 
 shapes[0][4] = 9*box;
 shapes[0][5] = 9*box;
-shapes[0][6] = 3*box;
-shapes[0][7] = 4;
+//shapes[0][6] = 3*box;
+//shapes[0][7] = 4;
 
 shapes[1] = [];
 for(let i=0; i<3; i++)
@@ -38,8 +38,8 @@ shapes[1][3] = {
 
 shapes[1][4] = 9*box;
 shapes[1][5] = 10*box;
-shapes[1][6] = 2*box;
-shapes[1][7] = 3;
+//shapes[1][6] = 2*box;
+//shapes[1][7] = 3;
 
 shapes[2] = [];
 for(let i=0; i<3; i++)
@@ -55,8 +55,8 @@ shapes[2][3] = {
 
 shapes[2][4] = 8*box;
 shapes[2][5] = 9*box;
-shapes[2][6] = 2*box;
-shapes[2][7] = 3;
+//shapes[2][6] = 2*box;
+//shapes[2][7] = 3;
 
 shapes[3] = [];
 for(let i=0;i<4;i++)
@@ -67,8 +67,8 @@ for(let i=0;i<4;i++)
 
 shapes[3][4] = 8*box;
 shapes[3][5] = 9*box;
-shapes[3][6] = box;
-shapes[3][7] = 2;
+//shapes[3][6] = box;
+//shapes[3][7] = 2;
 
 shapes[4] = [];
 for(let i=0;i<4;i++)
@@ -79,8 +79,8 @@ for(let i=0;i<4;i++)
 
 shapes[4][4] = 8*box;
 shapes[4][5] = 10*box;
-shapes[4][6] = box;
-shapes[4][7] = 2;
+//shapes[4][6] = box;
+//shapes[4][7] = 2;
 
 shapes[5] = [];
 for(let i=0;i<4;i++)
@@ -91,8 +91,8 @@ for(let i=0;i<4;i++)
 
 shapes[5][4] = 8*box;
 shapes[5][5] = 10*box;
-shapes[5][6] = box;
-shapes[5][7] = 2;
+//shapes[5][6] = box;
+//shapes[5][7] = 2;
 
 shapes[6] = [];
 for(let i=0;i<4;i++)
@@ -103,8 +103,8 @@ for(let i=0;i<4;i++)
 
 shapes[6][4] = 8*box;
 shapes[6][5] = 10*box;
-shapes[6][6] = box;
-shapes[6][7] = 2;
+//shapes[6][6] = box;
+//shapes[6][7] = 2;
 
 const music = new Audio();
 music.src = "audio/Tetris.mp3";
@@ -117,6 +117,8 @@ document.addEventListener("keyup", stop);
 function direction(event) {
 	if(event.keyCode == 37)
 		d = "LEFT";
+	else if(event.keyCode == 38)
+		d = "UP";
 	else if(event.keyCode == 39)
 		d = "RIGHT";
 }
@@ -126,7 +128,8 @@ function stop(event) {
 }
 
 var val = 0;
-//var height = 0;
+var height = box;
+var mode = 0;
 
 shape = [];
 for(let i=0; i<4; i++)
@@ -137,7 +140,7 @@ for(let i=0; i<4; i++)
 
 shape[4] = shapes[0][4];
 shape[5] = shapes[0][5];
-shape[6] = box;
+//shape[6] = box;
 //shape[6] = shapes[0][6];
 //shape[7] = shapes[0][7];
 
@@ -157,6 +160,9 @@ function scorer() {
 		}
 	}
 }
+
+let X = [];
+let Y = [];
 
 function draw() {
 	let flag=0;
@@ -186,7 +192,8 @@ function draw() {
 	for(let i=0; i<4; i++)
 		shape[i].y+=box;
 	
-	shape[6]+=box;
+	height += box;
+	//shape[6]+=box;
 	if(d=="LEFT") {
 		let l=0;
 		if(shape[4]>0) {
@@ -219,10 +226,112 @@ function draw() {
 			}
 		}
 	}
+	else if(d=="UP") {
+		if(val==1) {
+			if(mode == 0) {
+				if(shape[4]>0) {
+					if(board[Math.floor(shape[0].y/box)+1][Math.floor(shape[0].x/box)+1]==0 && board[Math.floor(shape[2].y/box)-1][Math.floor(shape[2].x/box)-1]==0 && board[Math.floor(shape[3].y/box)][Math.floor(shape[3].x/box)-2]==0) {
+						for(let i=0;i<4;i++) {
+							X[i] = shape[i].x;
+							Y[i] = shape[i].y;
+						}
+						shape[0] = {
+							x : X[2] - box,
+							y : Y[2] - box
+						}
+						shape[2] = {
+							x : X[0] + box,
+							y : Y[0] + box
+						}
+						shape[3] = {
+							x : X[3] - 2*box,
+							y : Y[3]
+						}
+						mode = (mode+1)%4;
+						shape[4]-=box;
+					}
+					else if(board[Math.floor(shape[0].y/box)+1][Math.floor(shape[0].x/box)+2]==0 && board[Math.floor(shape[1].y/box)][Math.floor(shape[1].x/box)+1]==0 && board[Math.floor(shape[2].y/box)-1][Math.floor(shape[2].x/box)]==0 && board[Math.floor(shape[3].y/box)][Math.floor(shape[3].x/box)-1]==0) {
+						for(let i=0;i<4;i++) {
+							X[i] = shape[i].x;
+							Y[i] = shape[i].y;
+						}
+						shape[0] = {
+							x : X[2],
+							y : Y[2] - box
+						}
+						shape[1] = {
+							x : X[1] + box,
+							y : Y[1]
+						}
+						shape[2] = {
+							x : X[0] + 2*box,
+							y : Y[0] + box
+						}
+						shape[3] = {
+							x : X[3] - box,
+							y : Y[3]
+						}
+						mode = (mode+1)%4;
+						shape[5]-=box;
+					}
+				}
+				else {
+					if(board[Math.floor(shape[0].y/box)+1][Math.floor(shape[0].x/box)+2]==0 && board[Math.floor(shape[1].y/box)][Math.floor(shape[1].x/box)+1]==0 && board[Math.floor(shape[2].y/box)-1][Math.floor(shape[2].x/box)]==0 && board[Math.floor(shape[3].y/box)][Math.floor(shape[3].x/box)-1]==0) {
+						for(let i=0;i<4;i++) {
+							X[i] = shape[i].x;
+							Y[i] = shape[i].y;
+						}
+						shape[0] = {
+							x : X[2],
+							y : Y[2] - box
+						}
+						shape[1] = {
+							x : X[1] + box,
+							y : Y[1]
+						}
+						shape[2] = {
+							x : X[0] + 2*box,
+							y : Y[0] + box
+						}
+						shape[3] = {
+							x : X[3] - box,
+							y : Y[3]
+						}
+						mode = (mode+1)%4;
+						shape[5]-=box;
+					}
+				}
+			}
+			else if(mode == 1) {
+				if(shape[0].y>0 && shape[1].y>0 && board[Math.floor(shape[0].y/box)-1][Math.floor(shape[0].x/box)]==0 && board[Math.floor(shape[1].y/box)-1][Math.floor(shape[1].x/box)]==0) {
+					if(board[Math.floor(shape[0].y/box)-1][Math.floor(shape[0].x/box)+1]==0 && board[Math.floor(shape[2].y/box)+1][Math.floor(shape[2].x/box)-1]==0 && board[Math.floor(shape[3].y/box)-2][Math.floor(shape[3].x/box)]==0) {
+						for(let i=0;i<4;i++) {
+							X[i] = shape[i].x;
+							Y[i] = shape[i].y;
+						}
+						shape[0] = {
+							x : X[2] - box,
+							y : Y[2] - box
+						}
+						shape[2] = {
+							x : X[0] + box,
+							y : Y[0] + box
+						}
+						shape[3] = {
+							x : X[3] - 2*box,
+							y : Y[3]
+						}
+						mode = (mode+1)%4;
+						shape[4]-=box;
+					}
+				}
+			}
+		}
+	}
 	
 	//height++;
 	
-	if(shape[6]==20*box) 
+	if(height==20*box) 
 		flag=1;
 	else
 		for(let i=0; i<4; i++)																	//There might be a problem here in future
@@ -235,16 +344,16 @@ function draw() {
 			if(shape[i].y>=0)
 				board[Math.floor(shape[i].y/box)][Math.floor(shape[i].x/box)] = 1;
 		val = (val+1)%7;
-		for(let i=0;i<4;i++) {
+		for(let i=0;i<4;i++)
 			shape[i] = {
 				x : shapes[val][i].x,
 				y : shapes[val][i].y
 			}
-			shape[4] = shapes[val][4];
-			shape[5] = shapes[val][5];
-			//shape[6] = shapes[val][6];
-			shape[6] = box;
-		}
+		shape[4] = shapes[val][4];
+		shape[5] = shapes[val][5];
+		//shape[6] = shapes[val][6];
+		height = box;
+		mode = 0;
 		//height = 0;
 	}
 	scorer();
