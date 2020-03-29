@@ -154,23 +154,43 @@ function stop(event) {
 	d = "";
 }
 
-var val = 0;
-var height = 4;
+var val = Math.floor(Math.random()*7);
+var height;
+if(val==0)
+	height = 4;
+else
+	height = 3;
 var side = 8;
 var mode = 0;
-
 
 for(let i=0; i<4; i++) {
 	line[i] = [];
 	for(let j=0; j<4; j++)
-		line[i][j] = shapes[0][i][j];
+		line[i][j] = 0;
+}
+
+for(let i=0; i<4; i++) {
+	line[i] = [];
+	for(let j=0; j<4; j++)
+		line[i][j] = 0;
 }
 
 for(let i=0; i<3; i++) {
 	shape[i] = [];
 	for(let j=0; j<3; j++)
-		shape[i][j] = shapes[1][i][j];
+		shape[i][j] = 0;
 }
+
+if(val==0)
+	for(let i=0; i<4; i++) {
+		for(let j=0; j<4; j++)
+			line[i][j] = shapes[0][i][j];
+	}
+else
+	for(let i=0; i<3; i++) {
+		for(let j=0; j<3; j++)
+			shape[i][j] = shapes[val][i][j];
+	}
 
 let score = 0;
 
@@ -310,11 +330,19 @@ function draw() {
 				for(let j=0; j<4; j++)
 					if(line[i][j]==1)
 						board[height-4+i][side+j] = 1;
-			val = (val+1)%7;
-			for(let i=0; i<3; i++)
-				for(let j=0; j<3; j++)
-					shape[i][j] = shapes[val][i][j];
-			height = 3;
+			val = Math.floor(Math.random()*7);
+			if(val == 0) {
+				for(let i=0; i<4; i++)
+					for(let j=0; j<4; j++)
+						line[i][j] = shapes[0][i][j];
+				height = 4;
+			}
+			else {
+				for(let i=0; i<3; i++)
+					for(let j=0; j<3; j++)
+						shape[i][j] = shapes[val][i][j];
+				height = 3;
+			}
 			side = 8;
 			mode = 0;
 		}
@@ -383,11 +411,19 @@ function draw() {
 				for(let j=0; j<3; j++)
 					if(shape[i][j]==1)
 						board[height-3+i][side+j] = 1;
-			val = (val+1)%7;
-			for(let i=0; i<3; i++)
-				for(let j=0; j<3; j++)
-					shape[i][j] = shapes[val][i][j];
-			height = 3;
+			val = Math.floor(Math.random()*7);
+			if(val == 0) {
+				for(let i=0; i<4; i++)
+					for(let j=0; j<4; j++)
+						line[i][j] = shapes[0][i][j];
+				height = 4;
+			}
+			else {
+				for(let i=0; i<3; i++)
+					for(let j=0; j<3; j++)
+						shape[i][j] = shapes[val][i][j];
+				height = 3;
+			}
 			side = 8;
 			mode = 0;
 		}
@@ -498,8 +534,8 @@ function draw() {
 				for(let j=0; j<3; j++)
 					if(shape[i][j]==1)
 						board[height-3+i][side+j] = 1;
-			val = (val+1)%7;
-			if(val==0) {
+			val = Math.floor(Math.random()*7);
+			if(val == 0) {
 				for(let i=0; i<4; i++)
 					for(let j=0; j<4; j++)
 						line[i][j] = shapes[0][i][j];
