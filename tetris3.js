@@ -140,23 +140,23 @@ music.src = "audio/Tetris.mp3";
 let d="";
 
 var button1 = document.createElement("buttonL");
-button1.innerHTML = "L";
+//button1.innerHTML = "L";
 
 var body = document.getElementsByTagName("body")[0];
 body.appendChild(button1);
 
 var button2 = document.createElement("buttonR");
-button2.innerHTML = "R";
+//button2.innerHTML = "R";
 
 body.appendChild(button2);
 
 var button3 = document.createElement("buttonU");
-button3.innerHTML = "C";
+//button3.innerHTML = "C";
 
 body.appendChild(button3);
 
 var button4 = document.createElement("buttonD");
-button4.innerHTML = "D";
+//button4.innerHTML = "D";
 
 body.appendChild(button4);
 
