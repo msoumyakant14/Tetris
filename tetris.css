@@ -1,0 +1,55 @@
+buttonL {
+  position: relative;
+  left: -195px;
+  top: -125px;
+  line-height: 60px;
+  font-weight: bold;
+  padding: 20px 30px;
+  background: salmon;
+  border: none;
+}
+buttonL:hover {
+  background: lightsalmon;
+}
+
+buttonR {
+  position: relative;
+  left: -150px;
+  top: -125px;
+  line-height: 60px;
+  font-weight: bold;
+  padding: 20px 30px;
+  background: salmon;
+  border: none;
+}
+buttonR:hover {
+  background: lightsalmon;
+}
+
+buttonU {
+  position: relative;
+  left: -280px;
+  top: -200px;
+  line-height: 60px;
+  font-weight: bold;
+  padding: 20px 30px;
+  background: salmon;
+  border: none;
+}
+buttonU:hover {
+  background: lightsalmon;
+}
+
+buttonD {
+  position: relative;
+  left: -355px;
+  top: -50px;
+  line-height: 60px;
+  font-weight: bold;
+  padding: 20px 30px;
+  background: salmon;
+  border: none;
+}
+buttonD:hover {
+  background: lightsalmon;
+}
