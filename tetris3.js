@@ -173,6 +173,19 @@ button4.addEventListener("mousedown", function() {
 	d="DOWN";
 })
 
+button1.addEventListener("touchstart", function() {
+	d="LEFT";
+})
+button2.addEventListener("touchstart", function() {
+	d="RIGHT";
+})
+button3.addEventListener("touchstart", function() {
+	d="UP";
+})
+button4.addEventListener("touchstart", function() {
+	d="DOWN";
+})
+
 button1.addEventListener("mouseup", function() {
 	d="";
 })
@@ -185,6 +198,20 @@ button3.addEventListener("mouseup", function() {
 button4.addEventListener("mouseup", function() {
 	d="";
 })
+
+button1.addEventListener("touchend", function() {
+	d="";
+})
+button2.addEventListener("touchend", function() {
+	d="";
+})
+button3.addEventListener("touchend", function() {
+	d="";
+})
+button4.addEventListener("touchend", function() {
+	d="";
+})
+
 document.addEventListener("keydown", direction);
 document.addEventListener("keyup", stop);
 function direction(event) {
