@@ -137,7 +137,10 @@ const music = new Audio();
 music.src = "audio/Tetris.mp3";
 
 
-let d="";
+let dl="";
+let dr="";
+let du="";
+let dd="";
 
 var button1 = document.createElement("buttonL");
 //button1.innerHTML = "L";
@@ -161,72 +164,79 @@ var button4 = document.createElement("buttonD");
 body.appendChild(button4);
 
 button1.addEventListener("mousedown", function() {
-	d="LEFT";
+	dl="LEFT";
 })
 button2.addEventListener("mousedown", function() {
-	d="RIGHT";
+	dr="RIGHT";
 })
 button3.addEventListener("mousedown", function() {
-	d="UP";
+	du="UP";
 })
 button4.addEventListener("mousedown", function() {
-	d="DOWN";
+	dd="DOWN";
 })
 
 button1.addEventListener("touchstart", function(e) {
-	d="LEFT";
+	dl="LEFT";
 })
 button2.addEventListener("touchstart", function(e) {
-	d="RIGHT";
+	dr="RIGHT";
 })
 button3.addEventListener("touchstart", function(e) {
-	d="UP";
+	du="UP";
 })
 button4.addEventListener("touchstart", function(e) {
-	d="DOWN";
+	dd="DOWN";
 })
 
 button1.addEventListener("mouseup", function() {
-	d="";
+	dl="";
 })
 button2.addEventListener("mouseup", function() {
-	d="";
+	dr="";
 })
 button3.addEventListener("mouseup", function() {
-	d="";
+	du="";
 })
 button4.addEventListener("mouseup", function() {
-	d="";
+	dd="";
 })
 
 button1.addEventListener("touchend", function(e) {
-	d="";
+	dl="";
 })
 button2.addEventListener("touchend", function(e) {
-	d="";
+	dr="";
 })
 button3.addEventListener("touchend", function(e) {
-	d="";
+	du="";
 })
 button4.addEventListener("touchend", function(e) {
-	d="";
+	dd="";
 })
 
 document.addEventListener("keydown", direction);
 document.addEventListener("keyup", stop);
 function direction(event) {
 	if(event.keyCode == 37)
-		d = "LEFT";
-	else if(event.keyCode == 38)
-		d = "UP";
-	else if(event.keyCode == 39)
-		d = "RIGHT";
-	else if(event.keyCode == 40)
-		d = "DOWN";
+		dl = "LEFT";
+	if(event.keyCode == 38)
+		du = "UP";
+	if(event.keyCode == 39)
+		dr = "RIGHT";
+	if(event.keyCode == 40)
+		dd = "DOWN";
 }
 
 function stop(event) {
-	d = "";
+	if(event.keyCode == 37)
+		dl = "";
+	if(event.keyCode == 38)
+		du = "";
+	if(event.keyCode == 39)
+		dr = "";
+	if(event.keyCode == 40)
+		dd = "";
 }
 
 var val = Math.floor(Math.random()*7);
@@ -312,8 +322,8 @@ function draw() {
 					ctx.strokeStyle = "black";
 					ctx.strokeRect((j+side)*box, (height-4+i)*box, box, box);
 				}
-		height+=0.5;
-		if(d=="LEFT") {
+		height+=0.25;
+		if(dl=="LEFT") {
 			if(side + leftsides[val][mode] >0) {
 				let l=0;
 				for(let i=0;i<4;i++) {
@@ -331,7 +341,7 @@ function draw() {
 				}
 			}
 		}
-		else if(d=="RIGHT") {
+		if(dr=="RIGHT") {
 			if(side + rightsides[val][mode] <18) {
 				let l=0;
 				for(let i=0;i<4;i++) {
@@ -349,7 +359,7 @@ function draw() {
 				}
 			}
 		}
-		else if(d=="UP") {
+		if(du=="UP") {
 			let linei = [];
 			for(let i=0; i<4; i++) {
 				linei[i] = [];
@@ -425,8 +435,8 @@ function draw() {
 			side = 8;
 			mode = 0;
 		}
-		if(d=="DOWN")
-			height+=0.5;
+		if(dd=="DOWN")
+			height+=0.25;
 	}
 	else if(val==3) {
 		for(let i=0; i<3; i++)
@@ -437,8 +447,8 @@ function draw() {
 					ctx.strokeStyle = "black";
 					ctx.strokeRect((j+side)*box, (height-3+i)*box, box, box);
 				}
-		height+=0.5;
-		if(d=="LEFT") {
+		height+=0.25;
+		if(dl=="LEFT") {
 			if(side + leftsides[val] >0) {
 				let l=0;
 				for(let i=0;i<3;i++) {
@@ -456,7 +466,7 @@ function draw() {
 				}
 			}
 		}
-		else if(d=="RIGHT") {
+		if(dr=="RIGHT") {
 			if(side + rightsides[val] <18) {
 				let l=0;
 				for(let i=0;i<3;i++) {
@@ -508,8 +518,8 @@ function draw() {
 			side = 8;
 			mode = 0;
 		}
-		if(d=="DOWN")
-			height+=0.5;
+		if(dd=="DOWN")
+			height+=0.25;
 	}
 	else {
 		for(let i=0; i<3; i++)
@@ -520,8 +530,8 @@ function draw() {
 					ctx.strokeStyle = "black";
 					ctx.strokeRect((j+side)*box, (height-3+i)*box, box, box);
 				}
-		height+=0.5;
-		if(d=="LEFT") {
+		height+=0.25;
+		if(dl=="LEFT") {
 			if(side + leftsides[val][mode] >0) {
 				let l=0;
 				for(let i=0;i<3;i++) {
@@ -539,7 +549,7 @@ function draw() {
 				}
 			}
 		}
-		else if(d=="RIGHT") {
+		if(dr=="RIGHT") {
 			if(side + rightsides[val][mode] <18) {
 				let l=0;
 				for(let i=0;i<3;i++) {
@@ -557,7 +567,7 @@ function draw() {
 				}
 			}
 		}
-		else if(d=="UP") {
+		if(du=="UP") {
 			let shapei = [];
 			for(let i=0; i<3; i++) {
 				shapei[i] = [];
@@ -633,8 +643,8 @@ function draw() {
 			side = 8;
 			mode = 0;
 		}
-		if(d=="DOWN")
-			height+=0.5;
+		if(dd=="DOWN")
+			height+=0.25;
 	}
 
 	scorer();
@@ -649,4 +659,4 @@ function draw() {
 
 }
 
-let game = setInterval(draw, 300);
+let game = setInterval(draw, 150);
